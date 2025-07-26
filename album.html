@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Love Story 💑</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fff0f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+    .quote {
+      font-size: 1.4em;
+      color: #d63384;
+      margin-bottom: 20px;
+    }
+    .photos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .photos img {
+      max-width: 100%;
+      width: 180px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    button {
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #ff1493;
+    }
+  </style>
+</head>
+<body>
+  <div class="quote" id="quote">Our story begins here... 💖</div>
+  <div class="photos" id="photoContainer"></div>
+  <button onclick="nextSlide()" id="nextButton">Next Chapter ➡️</button>
+
+  <script>
+    const slides = [
+      {
+        photos: ['img1.jpg', 'img2.jpg'],
+        quote: "The first time I saw you, my heart whispered 'that's the one'."
+      },
+      {
+        photos: ['img3.jpg', 'img4.jpg'],
+        quote: "Every moment with you is a memory I'll cherish forever."
+      },
+      {
+        photos: ['img5.jpg'],
+        quote: "In your smile, I see something more beautiful than stars."
+      },
+      {
+        photos: ['img6.jpg', 'img7.jpg'],
+        quote: "Together, we're magic."
+      },
+      {
+        photos: ['img8.jpg', 'img9.jpg'],
+        quote: "This love is our greatest adventure."
+      },
+      {
+        photos: ['img10.jpg'],
+        quote: "And the best is yet to come... 💍"
+      }
+    ];
+
+    let currentSlide = 0;
+
+    function nextSlide() {
+      if (currentSlide < slides.length) {
+        const { photos, quote } = slides[currentSlide];
+        const container = document.getElementById("photoContainer");
+        container.innerHTML = photos.map(img => `<img src="${img}" alt="Memory">`).join('');
+        document.getElementById("quote").textContent = quote;
+
+        currentSlide++;
+
+        if (currentSlide === slides.length) {
+          document.getElementById("nextButton").textContent = "Replay 💫";
+        } else if (currentSlide > slides.length) {
+          currentSlide = 0;
+          nextSlide();
+        }
+      } else {
+        currentSlide = 0;
+        nextSlide();
+      }
+    }
+
+    // Initialize first slide
+    nextSlide();
+  </script>
+</body>
+</html>
