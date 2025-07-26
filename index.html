@@ -3,112 +3,116 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Just One Question 💌</title>
+  <title>Romantic Date Invite 💖</title>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <style>
     body {
-      font-family: 'Segoe UI', cursive;
-      text-align: center;
-      background-color: #fff0f5;
-      color: #c2185b;
-      margin: 0;
-      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
-    }
-
-    .container {
+      margin: 0;
+      background: #fff0f5;
+      flex-direction: column;
       padding: 20px;
-      max-width: 90%;
     }
-
-    .question {
-      font-size: 5vw;
-      margin-bottom: 30px;
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
     }
-
     button {
-      font-size: 5vw;
-      padding: 12px 24px;
-      margin: 10px;
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
-      width: 40vw;
-      max-width: 200px;
-    }
-
-    .yes-btn {
-      background-color: #f06292;
+      background-color: #ff69b4;
       color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      margin: 10px;
+      cursor: pointer;
     }
-
-    .yes-btn:hover {
-      background-color: #ec407a;
+    button:hover {
+      background-color: #ff1493;
     }
-
-    .no-btn {
-      background-color: white;
-      color: #f06292;
-      border: 2px solid #f06292;
-    }
-
-    .heart {
-      font-size: 10vw;
+    #datePicker {
       margin-top: 20px;
-      animation: pulse 1s infinite;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      width: 100%;
+      font-size: 16px;
     }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 <body>
-
   <div class="container">
-    <div class="question" id="question">Will you go on a date with me? 💖</div>
-    <button class="yes-btn" onclick="chooseYes()">Yes 💕</button>
-    <button class="no-btn" onclick="chooseNo()">No 🙈</button>
-    <div class="heart">💗</div>
+    <h2 id="question">Would you like to go on a date with me? 💕</h2>
+    <div id="buttons">
+      <button onclick="handleAnswer('Yes')">Yes</button>
+      <button onclick="handleAnswer('No')">No</button>
+    </div>
+    <input type="date" id="datePicker" class="hidden" />
   </div>
 
   <script>
-    const messages = [
-      "Awww come on, just one little date? 🥺",
-      "It’ll be magical, I promise! ✨",
-      "I'll bring chocolate! 🍫",
-      "What if I dress up just for you? 👔",
-      "Don't say no to this face 🥹",
-      "You’re really going to resist this much love? 😘",
-      "Okay but I’m not giving up 💘",
-      "You know you want to say yes 😍",
-      "You’re making it hard to be cute here 😅",
-      "Okay last time... will you? 🥰"
+    emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS user ID
+
+    const questions = [
+      "Would you like to go on a date with me? 💕",
+      "Pleaseeee? Just one date? 🥺",
+      "You know you want to! 😘",
+      "Don't say no to love 💖",
+      "I insist! Let's go on a date 🌹"
     ];
 
-    let index = 0;
+    let currentQuestion = 0;
+    let answers = [];
 
-    function chooseYes() {
-      document.body.innerHTML = `
-        <div style="padding: 20px; text-align: center;">
-          <h1 style="font-size: 6vw; color: #c2185b;">🎉 YAY! 💞</h1>
-          <p style="font-size: 5vw;">Get ready, babe... I'm taking you out at 7! 🌙✨</p>
-          <p style="font-size: 4.5vw;">Dress up, bring that smile I love! 💃🕺</p>
-          <div style="font-size: 12vw; margin-top: 20px;">💑💖🌹</div>
-        </div>
-      `;
+    function handleAnswer(answer) {
+      answers.push(`${questions[currentQuestion]} - ${answer}`);
+
+      if (answer === "Yes") {
+        document.getElementById("question").textContent = "Yaaay! 🥰 Pick a date below.";
+        document.getElementById("buttons").classList.add("hidden");
+        document.getElementById("datePicker").classList.remove("hidden");
+
+        document.getElementById("datePicker").addEventListener("change", function () {
+          sendEmail(this.value);
+          document.getElementById("question").textContent = "Thank you, my love! ❤️ Can't wait!";
+          document.getElementById("datePicker").classList.add("hidden");
+        });
+      } else {
+        currentQuestion++;
+        if (currentQuestion < questions.length) {
+          document.getElementById("question").textContent = questions[currentQuestion];
+        } else {
+          currentQuestion = 1;
+          document.getElementById("question").textContent = questions[currentQuestion];
+        }
+      }
     }
 
-    function chooseNo() {
-      document.getElementById("question").innerText = messages[index % messages.length];
-      index++;
+    function sendEmail(date) {
+      const templateParams = {
+        question_list: answers.join("\n"),
+        picked_date: date
+      };
+
+      emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
+        .then(function(response) {
+          console.log("SUCCESS!", response.status, response.text);
+        }, function(error) {
+          console.error("FAILED...", error);
+        });
     }
   </script>
-
 </body>
 </html>
