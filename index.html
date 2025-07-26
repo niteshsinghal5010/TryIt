@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Yes or No</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 100px;
+    }
+    .question {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="question" id="question">Do you like coding?</div>
+  <button onclick="chooseYes()">Yes</button>
+  <button onclick="chooseNo()">No</button>
+
+  <script>
+    const questions = [
+      "Do you like coding?",
+      "Do you like building websites?",
+      "Would you share this with others?",
+      "Are you enjoying this?"
+    ];
+
+    let index = 0;
+
+    function chooseYes() {
+      document.body.innerHTML = "<h1>🎉 Congratulations!</h1>";
+    }
+
+    function chooseNo() {
+      index++;
+      if (index < questions.length) {
+        document.getElementById("question").innerText = questions[index];
+      } else {
+        document.body.innerHTML = "<h1>🎉 Congratulations (End of Questions)!</h1>";
+      }
+    }
+  </script>
+</body>
+</html>
