@@ -1,52 +1,96 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Yes or No</title>
+  <title>Just One Question 💌</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', cursive;
       text-align: center;
-      padding-top: 100px;
+      padding-top: 80px;
+      background-color: #fff0f5;
+      color: #c2185b;
+      transition: all 0.3s ease;
     }
     .question {
-      font-size: 24px;
-      margin-bottom: 20px;
+      font-size: 28px;
+      margin: 30px auto;
+      max-width: 90%;
     }
     button {
-      font-size: 18px;
-      padding: 10px 20px;
-      margin: 10px;
+      font-size: 20px;
+      padding: 14px 28px;
+      margin: 15px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .yes-btn {
+      background-color: #f06292;
+      color: white;
+    }
+    .yes-btn:hover {
+      background-color: #ec407a;
+    }
+    .no-btn {
+      background-color: white;
+      color: #f06292;
+      border: 2px solid #f06292;
+    }
+    .no-btn:hover {
+      background-color: #fff0f5;
+      transform: scale(1.05);
+    }
+    .heart {
+      font-size: 50px;
+      margin-top: 30px;
+      animation: pulse 1s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
     }
   </style>
 </head>
 <body>
-  <div class="question" id="question">Do you like coding?</div>
-  <button onclick="chooseYes()">Yes</button>
-  <button onclick="chooseNo()">No</button>
+
+  <div class="question" id="question">Will you go on a date with me? 💖</div>
+  <button class="yes-btn" onclick="chooseYes()">Yes 💕</button>
+  <button class="no-btn" onclick="chooseNo()">No 🙈</button>
+  <div class="heart">💗</div>
 
   <script>
-    const questions = [
-      "Do you like coding?",
-      "Do you like building websites?",
-      "Would you share this with others?",
-      "Are you enjoying this?"
+    const messages = [
+      "Awww come on, just one little date? 🥺",
+      "It’ll be magical, I promise! ✨",
+      "I'll bring chocolate! 🍫",
+      "What if I dress up just for you? 👔",
+      "Don't say no to this face 🥹",
+      "You’re really going to resist this much love? 😘",
+      "Okay but I’m not giving up 💘",
+      "You know you want to say yes 😍",
+      "You’re making it hard to be cute here 😅",
+      "Okay last time... will you? 🥰"
     ];
 
     let index = 0;
-    let y = 0;
 
     function chooseYes() {
-      document.body.innerHTML = "<h1>🎉 Congratulations!</h1>";
+      document.body.innerHTML = `
+        <h1 style="font-size: 32px; color: #c2185b;">🎉 YAY! 💞</h1>
+        <p style="font-size: 24px;">Get ready, babe... I'm taking you out at 7! 🌙✨</p>
+        <p style="font-size: 20px;">Dress up, bring that smile I love! 💃🕺</p>
+        <div style="font-size: 60px; margin-top: 20px;">💑💖🌹</div>
+      `;
     }
 
     function chooseNo() {
+      const question = document.getElementById("question");
+      question.innerText = messages[index % messages.length];
       index++;
-      if (index < questions.length) {
-        document.getElementById("question").innerText = questions[index];
-      } else {
-        document.body.innerHTML = "<h1>🎉 Congratulations (End of Questions)!</h1>";
-      }
     }
   </script>
+
 </body>
 </html>
