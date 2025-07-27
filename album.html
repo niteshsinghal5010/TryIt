@@ -32,8 +32,9 @@
     .sub-header {
       font-size: 28px;
       color: #004d80;
-      margin-top: 20px;
+      margin-bottom: 10px;
       animation: fadeInScale 1.5s ease-in-out;
+      display: none; /* Hidden by default */
     }
 
     .start-btn {
@@ -104,21 +105,19 @@
 
     .emoji {
       position: absolute;
-      top: 50px;
-      left: 50%;
-      transform: translateX(-50%);
+      top: 25%;
+      right: 20%;
       font-size: 40px;
       z-index: 3;
     }
 
     .next-btn {
       position: absolute;
-      bottom: 110px;
-      left: 50%;
-      transform: translateX(-50%);
+      bottom: 25%;
+      left: 20%;
       padding: 10px 20px;
       font-size: 16px;
-      background-color: #ff66b2;
+      background: linear-gradient(to right, #3a8dde, #0059b3);
       color: white;
       border: none;
       border-radius: 8px;
@@ -128,7 +127,7 @@
     }
 
     .next-btn:hover {
-      background-color: #e055a3;
+      background-color: #004080;
     }
 
     @keyframes fadeInScale {
@@ -146,9 +145,10 @@
 <body>
   <div class="intro">
     <div class="title">Our Magical Moments 💞</div>
-    <div class="sub-header">Your first cute look. 😊</div>
     <button class="start-btn" onclick="startGallery()">Let's View</button>
   </div>
+
+  <div class="sub-header" id="header">Your first cute look. 😊</div>
 
   <div class="gallery-wrapper" id="gallery">
     <img class="img-top-left" src="https://raw.githubusercontent.com/niteshsinghal5010/TryIt/main/PR1.jpeg" alt="Memory 1" />
@@ -162,10 +162,11 @@
     function startGallery() {
       document.querySelector('.intro').style.display = 'none';
       document.getElementById('gallery').style.display = 'block';
+      document.getElementById('header').style.display = 'block';
     }
 
     function goToNextPage() {
-      window.location.href = "page2.html"; // Change this to your next page file
+      window.location.href = "page2.html"; // Replace with your actual second page
     }
   </script>
 </body>
