@@ -20,6 +20,7 @@
       justify-content: center;
       flex-direction: column;
     }
+
     .title {
       font-family: 'Pacifico', cursive;
       font-size: 48px;
@@ -27,6 +28,14 @@
       color: #003366;
       animation: fadeInScale 2s ease-in-out;
     }
+
+    .sub-header {
+      font-size: 28px;
+      color: #004d80;
+      margin-top: 20px;
+      animation: fadeInScale 1.5s ease-in-out;
+    }
+
     .start-btn {
       margin-top: 20px;
       padding: 10px 24px;
@@ -38,60 +47,89 @@
       cursor: pointer;
       transition: background-color 0.3s;
     }
+
     .start-btn:hover {
       background-color: #004d99;
     }
+
     .intro {
       text-align: center;
     }
 
     .gallery-wrapper {
-        display: none;
-        width: 100%;
-        max-width: 1000px;
-        height: 700px;
-        position: relative;
-        margin-top: 15px;
+      display: none;
+      width: 100%;
+      max-width: 1000px;
+      height: 700px;
+      position: relative;
+      margin-top: 15px;
     }
 
     .quote {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 22px;
-        color: #003366;
-        text-align: center;
-        max-width: 600px;
-        font-style: italic;
-        z-index: 2;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 22px;
+      color: #003366;
+      text-align: center;
+      max-width: 600px;
+      font-style: italic;
+      z-index: 2;
     }
 
-    /* Updated Image Styles */
     .img-top-left {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 48%;
-        max-width: 800px;
-        height: calc(50% - 60px); /* 50% height minus 20px spacing above/below quote */
-        border-radius: 16px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 48%;
+      max-width: 800px;
+      height: calc(50% - 60px);
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      object-fit: cover;
     }
 
     .img-bottom-right {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        width: 48%;
-        max-width: 800px;
-        height: calc(50% - 60px); /* 50% height minus 20px spacing above/below quote */
-        border-radius: 16px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        object-fit: cover;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 48%;
+      max-width: 800px;
+      height: calc(50% - 60px);
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      object-fit: cover;
     }
 
+    .emoji {
+      position: absolute;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 40px;
+      z-index: 3;
+    }
+
+    .next-btn {
+      position: absolute;
+      bottom: 110px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #ff66b2;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 3;
+      transition: background-color 0.3s;
+    }
+
+    .next-btn:hover {
+      background-color: #e055a3;
+    }
 
     @keyframes fadeInScale {
       0% {
@@ -108,19 +146,26 @@
 <body>
   <div class="intro">
     <div class="title">Our Magical Moments 💞</div>
+    <div class="sub-header">Your first cute look. 😊</div>
     <button class="start-btn" onclick="startGallery()">Let's View</button>
   </div>
 
   <div class="gallery-wrapper" id="gallery">
     <img class="img-top-left" src="https://raw.githubusercontent.com/niteshsinghal5010/TryIt/main/PR1.jpeg" alt="Memory 1" />
+    <div class="emoji">🥰</div>
     <img class="img-bottom-right" src="https://raw.githubusercontent.com/niteshsinghal5010/TryIt/main/PR2.jpeg" alt="Memory 2" />
     <div class="quote">"You are adorable.."</div>
+    <button class="next-btn" onclick="goToNextPage()">Next →</button>
   </div>
 
   <script>
     function startGallery() {
       document.querySelector('.intro').style.display = 'none';
       document.getElementById('gallery').style.display = 'block';
+    }
+
+    function goToNextPage() {
+      window.location.href = "page2.html"; // Change this to your next page file
     }
   </script>
 </body>
